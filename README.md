@@ -3,6 +3,12 @@
 - Using position sensor to identify current cardinal direction and play familiar north-related anthem when in N-direction.
 
 
+### Structure
+Three activities: MainActivity, Compass, AccMeter. Names pretty much describe them.
+ - MainActivity: Built through Androids tutorials.
+ - Compass: Pretty much copy paste from tutorial stated beneath. Song added and to be played between degrees 350 - 10. 
+ - AccMeter: Based on sensor handling tutorials, though most of the code is self made. Especially code handling motion/sound mapping.  
+
 ### Sources
  - Setting up Android: https://developer.android.com/training/basics/firstapp/index.html
  - Git -> Android studio: https://www.youtube.com/watch?v=_d4fFFAJKVA
