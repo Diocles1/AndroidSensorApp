@@ -1,7 +1,16 @@
 ## Sensor Android Application
-- Using accelerometer to print current values.
-- Using position sensor to identify current cardinal direction. 
+- Using accelerometer sensor to print current values and play Super Mario sounds to certain acc values.
+- Using position sensor to identify current cardinal direction and play familiar north-related anthem when in N-direction.
 
+
+### Sources
+ - Setting up Android: https://developer.android.com/training/basics/firstapp/index.html
+ - Git -> Android studio: https://www.youtube.com/watch?v=_d4fFFAJKVA
+ - Sensor handling: https://developer.android.com/reference/android/hardware/SensorEvent.html, https://developer.android.com/reference/android/hardware/SensorManager.html
+ - Compass: https://www.wlsdevelop.com/index.php/en/blog?option=com_content&view=article&id=38
+ - Sounds: https://themushroomkingdom.net/wav.shtml, https://sharingsweden.se/materials/swedens-national-anthem/
+ - Playing sounds: https://www.stechies.com/add-sound-play-button-click/
+ 
 ### Requirements
 Android.sdk
 ### Installing

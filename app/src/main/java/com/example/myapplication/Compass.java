@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class Compass extends AppCompatActivity implements SensorEventListener {
     private float[] mLastMagnetometer = new float[3];
     private boolean mLastAccelerometerSet = false;
     private boolean mLastMagnetometerSet = false;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,9 @@ public class Compass extends AppCompatActivity implements SensorEventListener {
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         compass_img = (ImageView) findViewById(R.id.img_compass);
         txt_compass = (TextView) findViewById(R.id.txt_azimuth);
+        mp = MediaPlayer.create(this,R.raw.swe);
+        mp.setLooping(true);
+
 
         start();
     }
@@ -61,24 +66,55 @@ public class Compass extends AppCompatActivity implements SensorEventListener {
 
         String where = "NW";
 
-        if (mAzimuth >= 350 || mAzimuth <= 10)
+        if (mAzimuth >= 350 || mAzimuth <= 10) {
             where = "N";
-        if (mAzimuth < 350 && mAzimuth > 280)
+            if (!mp.isPlaying()) {
+                mp.start();
+            }
+
+        }
+        if (mAzimuth < 350 && mAzimuth > 280) {
             where = "NW";
-        if (mAzimuth <= 280 && mAzimuth > 260)
+            if(mp.isPlaying()){
+                mp.pause();
+            }
+        }
+        if (mAzimuth <= 280 && mAzimuth > 260) {
             where = "W";
-        if (mAzimuth <= 260 && mAzimuth > 190)
+            if (mp.isPlaying()) {
+                mp.pause();
+            }
+        }
+        if (mAzimuth <= 260 && mAzimuth > 190) {
             where = "SW";
-        if (mAzimuth <= 190 && mAzimuth > 170)
+            if (mp.isPlaying()) {
+                mp.pause();
+            }
+        }
+        if (mAzimuth <= 190 && mAzimuth > 170) {
             where = "S";
-        if (mAzimuth <= 170 && mAzimuth > 100)
+            if (mp.isPlaying()) {
+                mp.pause();
+            }
+        }
+        if (mAzimuth <= 170 && mAzimuth > 100) {
             where = "SE";
-        if (mAzimuth <= 100 && mAzimuth > 80)
+            if (mp.isPlaying()) {
+                mp.pause();
+            }
+        }
+        if (mAzimuth <= 100 && mAzimuth > 80) {
             where = "E";
-        if (mAzimuth <= 80 && mAzimuth > 10)
+            if (mp.isPlaying()) {
+                mp.pause();
+            }
+        }
+        if (mAzimuth <= 80 && mAzimuth > 10) {
             where = "NE";
-
-
+            if (mp.isPlaying()) {
+                mp.pause();
+            }
+        }
         txt_compass.setText(mAzimuth + "° " + where);
     }
 
