@@ -5,12 +5,15 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class AccMeter extends AppCompatActivity implements SensorEventListener {
+    private ImageView box_img;
     private TextView txt_x_cord;
     private TextView txt_y_cord;
     private TextView txt_z_cord;
@@ -22,6 +25,14 @@ public class AccMeter extends AppCompatActivity implements SensorEventListener {
     private float x;
     private float y;
     private float z;
+    public static final int COIN = R.raw.smb3_coin;
+    public static final int FIREBALL = R.raw.smb3_fireball;
+
+    private MediaPlayer mpCoin;
+    private MediaPlayer mpFire;
+
+
+
 
 
     @Override
@@ -33,6 +44,10 @@ public class AccMeter extends AppCompatActivity implements SensorEventListener {
         txt_x_cord = (TextView) findViewById(R.id.x_text);
         txt_y_cord = (TextView) findViewById(R.id.y_text);
         txt_z_cord = (TextView) findViewById(R.id.z_text);
+        mpCoin = MediaPlayer.create(this,COIN );
+        mpFire = MediaPlayer.create(this,FIREBALL );
+        MediaPlayer.create(this, R.raw.smb3_powerup).start();
+
 
         start();
     }
@@ -79,31 +94,27 @@ public class AccMeter extends AppCompatActivity implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
-    public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() != Sensor.TYPE_ACCELEROMETER) {
+    public void onSensorChanged(SensorEvent event){
+        if (event.sensor.getType() != Sensor.TYPE_ACCELEROMETER && x<10 && y<15) {
             return;
         }
-        // with t, the low-pass filter's time-constant
-        // and dT, the event delivery rate
+        x = event.values[0];
+        y = event.values[1];
+        z = event.values[2];
 
-        final float alpha = 0.8f;
+        if(x > 10){
+            mpFire.start();
+        }
 
-        float[] gravity = new float[3];
-        gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
-        gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
-        gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
+        if(y > 15){
+            mpCoin.start();
 
-        float[] linear_acceleration = new float[3];
-        linear_acceleration[0] = event.values[0] - gravity[0];
-        linear_acceleration[1] = event.values[1] - gravity[1];
-        linear_acceleration[2] = event.values[2] - gravity[2];
-        
-        x = linear_acceleration[0];
-        y = linear_acceleration[1];
-        z = linear_acceleration[2];
+        }
+
         txt_x_cord.setText("X: " + x);
         txt_y_cord.setText("Y: " + y);
         txt_z_cord.setText("Z: " + z);
+
     }
 }
 
