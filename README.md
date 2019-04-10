@@ -1,4 +1,4 @@
-## Sensor Android Application
+## Android Sensor Application
 - Using accelerometer sensor to print current values and play Super Mario sounds to certain acc values.
 - Using position sensor to identify current cardinal direction and play familiar north-related anthem when in N-direction.
 
